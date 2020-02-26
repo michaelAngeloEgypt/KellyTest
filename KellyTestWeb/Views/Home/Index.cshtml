@@ -1,31 +1,132 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using KellyTestModel;
+@model KellyTest.Models.OuterOrdersModel
+@{
+    ViewBag.Title = "Orders";
+    WebGrid grid = new WebGrid(null, rowsPerPage: @Model.PageSize);
+    grid.Bind(Model.OrderProducts, autoSortAndPage: true, rowCount: @Model.PageSize);
 }
+<style>
+    /*for table header, hirerachy used to prevent affecting default paginator as side-effect*/
+    th a {
+        color: #ffffff;
+    }
+</style>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100  align-items-center">
+            <div class="col-4 text-left">
+                <h2 class="m-0 h-4 text-primary">Use search or filters below</h2>
+            </div>
+            <div class="col-5 offset-3 text-right">
+                <div class="input-group-btn">
+                    <button onclick="reset()" id="clearBtn" class="btn  btn-primary btn-default">Clear filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
+<hr />
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="col-4 text-primary">
+        <h4 class="form-group">
+            Operator: &nbsp;
+            @Html.RadioButtonFor(m => m.Operator, KellyTest.Models.AndOr.Or, new { @id = "optionOr" })
+            OR
+            &nbsp;
+            @Html.RadioButtonFor(m => m.Operator, KellyTest.Models.AndOr.And, new { @id = "optionAnd" })
+            AND
+        </h4>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="input-group col-5 offset-3">
+        <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" onchange="changeSearchText($(this))" />
+        <div class="input-group-btn">
+            <button onclick="search()" id="searchBtn" class="btn  btn-primary btn-default">Search</button>
+        </div>
     </div>
 </div>
+<hr />
+
+
+@*<div class="row" >
+    <div class="col-4">
+        <div class="form-group">
+            @Html.Label("Technologies", new { @class = "m-0 h-4 p-2 text-primary" })
+            @Html.DropDownList("lstTechnologies", Model.Technologies)
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group">
+            @Html.Label("Functions", new { @class = "m-0 h-4 p-2 text-primary" })
+            @Html.DropDownList("lstFunctions", Model.Functions)
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group">
+            @Html.Label("Actions", new { @class = "m-0 h-4 p-2 text-primary" })
+            @Html.DropDownList("lstActions", Model.Actions)
+        </div>
+
+    </div>
+</div>*@
+<table>
+    <tr>
+        <td>
+            <div id="DemandsGrid">
+                @grid.GetHtml(tableStyle: "table table-bordered",
+                  headerStyle: "thead-dark",
+                  mode: WebGridPagerModes.All,
+                  firstText: "<< First",
+                  previousText: "< Prev",
+                  nextText: "Next >",
+                  lastText: "Last >>",
+                     columns: grid.Columns(
+                     grid.Column("id", "id"),
+                     grid.Column("OrderId", "OrderId"),
+                     grid.Column("OrderId", "OrderId"),
+                     grid.Column("Quantity", "Quantity"),
+                     grid.Column("Price", "Price"),
+                     grid.Column("Total", "Total")
+                 ))
+
+            </div>
+        </td>
+    </tr>
+</table>
+
+@section scripts
+{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        filtering.search = '@ViewBag.search'
+    });
+    var filtering = {
+        search: "",
+    }
+    function changeSearchText(object) {
+        console.log(object)
+        filtering.search = object[0].value;
+    }
+    function search() {
+        var theOperator = $('input[name=Operator]:checked').val();
+        var url = '@Url.Action("Index")';
+        window.location.href = url +"?search="+filtering.search+"&&operatorFilter="+theOperator+"&&technologyFilter="+$('#lstTechnologies').val()+"&&functionFilter="+$('#lstFunctions').val()+"&&actionFilter=" +$('#lstActions').val()
+    }
+    function reset() {
+        $("input[name='search']").val("");
+        $("select").prop("selectedIndex",0);
+        $("#optionOr").prop("checked", true);
+        var theOperator = "Or";
+        var url = '@Url.Action("Index")';
+        window.location.href = url +"?&&operatorFilter="+theOperator+"&&technologyFilter="+$('#lstTechnologies').val()+"&&functionFilter="+$('#lstFunctions').val()+"&&actionFilter=" +$('#lstActions').val()
+    }
+
+    $('select').change(function (e) {
+        //e.preventDefault();
+        var theOperator = $('input[name=Operator]:checked').val();
+        var url = '@Url.Action("Index")';
+        window.location.href = url +"?search="+filtering.search+"&&operatorFilter="+theOperator+"&&technologyFilter="+$('#lstTechnologies').val()+"&&functionFilter="+$('#lstFunctions').val()+"&&actionFilter=" +$('#lstActions').val()
+    });
+    </script>
+}

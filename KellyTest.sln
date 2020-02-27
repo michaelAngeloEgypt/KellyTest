@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KellyTestWeb", "KellyTestWe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KellyTestModel", "KellyTestModel\KellyTestModel.csproj", "{380D910A-7821-4492-94F0-BE550B3A8E9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KellyTestCommon", "KellyTestCommon\KellyTestCommon.csproj", "{BE8315C7-2F6E-4ECC-8E98-13A5279277AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KellyTestApi", "KellyTestApi\KellyTestApi.csproj", "{A11121AA-29E1-4CA6-9B56-2222181C3679}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{380D910A-7821-4492-94F0-BE550B3A8E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{380D910A-7821-4492-94F0-BE550B3A8E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{380D910A-7821-4492-94F0-BE550B3A8E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE8315C7-2F6E-4ECC-8E98-13A5279277AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE8315C7-2F6E-4ECC-8E98-13A5279277AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE8315C7-2F6E-4ECC-8E98-13A5279277AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE8315C7-2F6E-4ECC-8E98-13A5279277AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A11121AA-29E1-4CA6-9B56-2222181C3679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11121AA-29E1-4CA6-9B56-2222181C3679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11121AA-29E1-4CA6-9B56-2222181C3679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11121AA-29E1-4CA6-9B56-2222181C3679}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,7 +27,6 @@ Exec ComputeShipments";
             try
             {
                 res = db.Database.SqlQuery<ShimpentDto>(BLQueries.GetShipmentDtos).ToList();
-                //var res = new List<VouchersDto>();
             }
             catch (Exception x)
             {

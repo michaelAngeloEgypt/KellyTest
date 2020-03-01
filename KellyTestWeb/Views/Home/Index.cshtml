@@ -7,16 +7,19 @@
 }
 <style>
     /*for table header, hirerachy used to prevent affecting default paginator as side-effect*/
-    th a {
+    /*
+            th a {
         color: #ffffff;
     }
+
+    */
 </style>
 
 <header class="masthead">
     <div class="container h-100">
         <div class="row h-100  align-items-center">
             <div class="col-4 text-left">
-                <h2 class="m-0 h-4 text-primary">Use search or filters below</h2>
+                <h2 class="m-0 h-4 text-primary">Outstanding orders:</h2>
             </div>
             <div class="col-5 offset-3 text-right">
                 <div class="input-group-btn">
@@ -50,30 +53,34 @@
 
 
 @*<div class="row" >
-    <div class="col-4">
-        <div class="form-group">
-            @Html.Label("Technologies", new { @class = "m-0 h-4 p-2 text-primary" })
-            @Html.DropDownList("lstTechnologies", Model.Technologies)
+        <div class="col-4">
+            <div class="form-group">
+                @Html.Label("Technologies", new { @class = "m-0 h-4 p-2 text-primary" })
+                @Html.DropDownList("lstTechnologies", Model.Technologies)
+            </div>
         </div>
-    </div>
-    <div class="col-4">
-        <div class="form-group">
-            @Html.Label("Functions", new { @class = "m-0 h-4 p-2 text-primary" })
-            @Html.DropDownList("lstFunctions", Model.Functions)
+        <div class="col-4">
+            <div class="form-group">
+                @Html.Label("Functions", new { @class = "m-0 h-4 p-2 text-primary" })
+                @Html.DropDownList("lstFunctions", Model.Functions)
+            </div>
         </div>
-    </div>
-    <div class="col-4">
-        <div class="form-group">
-            @Html.Label("Actions", new { @class = "m-0 h-4 p-2 text-primary" })
-            @Html.DropDownList("lstActions", Model.Actions)
-        </div>
+        <div class="col-4">
+            <div class="form-group">
+                @Html.Label("Actions", new { @class = "m-0 h-4 p-2 text-primary" })
+                @Html.DropDownList("lstActions", Model.Actions)
+            </div>
 
-    </div>
-</div>*@
+        </div>
+    </div>*@
+<div class="input-group-btn">
+    <button id="btnPack" class="btn  btn-primary btn-default">Pack orders</button>
+</div>
+    &nbsp;
 <table>
     <tr>
         <td>
-            <div id="DemandsGrid">
+            <div id="OrdersGrid">
                 @grid.GetHtml(tableStyle: "table table-bordered",
                   headerStyle: "thead-dark",
                   mode: WebGridPagerModes.All,

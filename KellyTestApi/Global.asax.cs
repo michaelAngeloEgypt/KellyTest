@@ -1,6 +1,7 @@
 ﻿using KellyTestApi.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -14,6 +15,9 @@ namespace KellyTestApi
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            XLogger.Application = nameof(KellyTestApi);
+            XLogger.Target = ConfigurationManager.AppSettings["XLogger.Target"];
+
             GlobalConfiguration.Configure(OrdersWebAPIConfig.Register);
         }
 

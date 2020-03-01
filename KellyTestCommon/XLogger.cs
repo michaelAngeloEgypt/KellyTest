@@ -18,8 +18,8 @@ public static class XLogger
     //in global.asax
     void Application_Start(object sender, EventArgs e)
     {
-        //VodaLogger.Application = String.Concat("SentimentWeb||", ConfigurationManager.AppSettings["WebsiteVersion"], "||");
-        //VodaLogger.Target = ConfigurationManager.AppSettings["EngineRoot"] + @"\Logs\logs.txt";
+        //XLogger.Application = String.Concat("SentimentWeb||", ConfigurationManager.AppSettings["WebsiteVersion"], "||");
+        //XLogger.Target = ConfigurationManager.AppSettings["EngineRoot"] + @"\Logs\logs.txt";
     }
     */
     //to clear IISExpress cache: System.Reflection.Assembly.GetExecutingAssembly().Location;
